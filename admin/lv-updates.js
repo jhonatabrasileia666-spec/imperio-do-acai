@@ -7,7 +7,7 @@
   window.fetch = async (input, init) => {
     const url = new URL(typeof input === 'string' ? input : input.url, location.href);
     const method = String(init?.method || input?.method || 'GET').toUpperCase();
-    const tracked = url.hostname === 'nhvarlrbqbryrurpdwvp.supabase.co' && !['GET', 'HEAD'].includes(method);
+    const tracked = url.hostname === 'xzhxqjgekqbyucdgtvra.supabase.co' && !['GET', 'HEAD'].includes(method);
     if (tracked) writes++;
     try { return await nativeFetch(input, init); }
     finally { if (tracked) setTimeout(() => { writes--; }, 1500); }
@@ -15,7 +15,7 @@
 
   let config, pending, checking = false, applying = false, holdCount = 0, nextAttempt = 0;
   let pollTimer, applyTimer, lastCheck = 0;
-  const key = suffix => `deliverylv_updates_${config.app}_${suffix}`;
+  const key = suffix => `imperio_updates_${config.app}_${suffix}`;
   const read = name => { try { return JSON.parse(sessionStorage.getItem(name) || 'null'); } catch { return null; } };
   const write = (name, value) => { sessionStorage.setItem(name, JSON.stringify(value)); };
   const build = () => document.querySelector('meta[name="lv-updates-build"]')?.content;
@@ -133,7 +133,7 @@
       if (!expectedBuild) throw new Error('A nova versão ainda não está publicada.');
       await refreshWorker();
       if ('caches' in window) {
-        const prefix = config.app === 'admin' ? 'deliverylv-panel-' : 'deliverylv-menu-';
+        const prefix = config.app === 'admin' ? 'imperio-panel-' : 'deliverylv-menu-';
         const names = await caches.keys();
         await Promise.all(names.filter(name => name.startsWith(prefix)).map(name => caches.delete(name)));
       }
