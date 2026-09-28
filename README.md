@@ -1,7 +1,16 @@
-# Delivery LV
+# Império do Açaí
 
-Cardápio online oficial da Delivery LV.
+Cardápio digital personalizado criado a partir da estrutura do Delivery LV, mas separado do projeto original.
 
-Produção: https://deliverylv.vercel.app
+## Estado atual
+- identidade visual adaptada para o Império do Açaí
+- produtos e preços cadastrados a partir dos cardápios fornecidos
+- categorias separadas por Açaí, Burguer, Pizzas, Kebab, Batata Fritas, Combos, Sanduíches, Sucos e Refrigerantes
+- carrinho funcional
+- personalização de açaí com tamanhos, até 4 acompanhamentos e adicionais
+- adicionais de hambúrguer
+- pizzas com tamanhos M e G
+- resumo do pedido copiável
 
-Última sincronização do `main`: 2026-09-17 — promoções por tamanho e valores promocionais.
+## Próxima etapa
+Conectar um backend próprio para o Império do Açaí (sem reutilizar o Supabase do Delivery LV), painel administrativo, pedidos em tempo real, impressão e notificações.
