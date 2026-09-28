@@ -4,81 +4,46 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#6f275f">
-<title>Império do Açaí | Cardápio Digital</title>
+<title>Império do Açaí | Cardápio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,700;9..144,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,700;9..144,800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0"></script>
 <script src="https://unpkg.com/lucide@0.468.0"></script>
 <style>
-:root{
-  --purple:#70245f;--purple-2:#8b2e79;--green:#159c63;--orange:#ff6f18;
-  --cream:#fff0cf;--cream-2:#f8dfb7;--ink:#30152d;--muted:#796375;--white:#fffdf9;
-  --line:#e7cda8;--shadow:0 18px 45px rgba(86,36,72,.14);
-}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--white);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif}
-button,input,textarea{font:inherit}button{cursor:pointer;border:0}img{display:block;max-width:100%}
-.topbar{position:sticky;top:0;z-index:30;background:rgba(255,253,249,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(112,36,95,.09)}
-.topbar-inner{max-width:1180px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-.brand{display:flex;align-items:center;gap:11px}.brand-seal{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--purple);color:white;box-shadow:inset 0 0 0 4px rgba(255,255,255,.18);font-family:Fraunces,serif;font-size:24px}
-.brand strong{display:block;font-family:Fraunces,serif;font-size:19px;line-height:1}.brand small{color:var(--green);font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-.cart-btn{position:relative;width:45px;height:45px;border-radius:14px;background:var(--cream);color:var(--purple);display:grid;place-items:center}.cart-count{position:absolute;right:-4px;top:-5px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:var(--orange);color:white;font-size:10px;font-weight:800;display:grid;place-items:center}
-.hero{background:
- radial-gradient(circle at 86% 18%,rgba(255,111,24,.2) 0 7%,transparent 7.5%),
- radial-gradient(circle at 80% 32%,rgba(21,156,99,.16) 0 12%,transparent 12.5%),
- linear-gradient(135deg,#fff3d8 0%,#ffe8bf 100%);
- border-bottom:1px solid #f0d2aa}
-.hero-inner{max-width:1180px;margin:auto;padding:52px 18px 38px;display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center}
-.eyebrow{display:inline-flex;gap:8px;align-items:center;color:var(--green);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.14em}
-.hero h1{font-family:Fraunces,serif;font-size:clamp(46px,7vw,86px);line-height:.92;margin:12px 0 15px;color:var(--purple);letter-spacing:-.04em}.hero h1 span{color:var(--green)}
-.hero p{max-width:590px;margin:0;color:#745b70;line-height:1.65;font-size:15px}
-.hero-card{min-height:280px;border-radius:34px;background:linear-gradient(145deg,var(--purple),#4a1740);padding:28px;color:white;position:relative;overflow:hidden;box-shadow:var(--shadow)}
-.hero-card:before,.hero-card:after{content:"";position:absolute;border-radius:50%}.hero-card:before{width:220px;height:220px;background:var(--green);right:-90px;top:-90px;opacity:.9}.hero-card:after{width:150px;height:150px;background:var(--orange);right:-52px;bottom:-65px}
-.hero-card .cup{font-size:84px;filter:drop-shadow(0 12px 18px rgba(0,0,0,.2));position:relative;z-index:2}.hero-card h3{position:relative;z-index:2;font:800 30px/1 Fraunces,serif;margin:20px 0 7px}.hero-card p{position:relative;z-index:2;color:#f7ddf1;font-size:13px}
-.hero-card .chips{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.hero-card .chips span{padding:7px 10px;border:1px solid rgba(255,255,255,.22);border-radius:999px;font-size:10px;font-weight:700;background:rgba(255,255,255,.07)}
-.wrap{max-width:1180px;margin:auto;padding:0 18px 120px}
-.categories{position:sticky;top:73px;z-index:20;display:flex;gap:8px;overflow:auto;margin:0 -18px;padding:12px 18px;background:rgba(255,253,249,.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(112,36,95,.08)}
-.categories::-webkit-scrollbar{display:none}.cat{flex:none;padding:10px 15px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--purple);font-size:12px;font-weight:800}.cat.active{background:var(--purple);color:#fff;border-color:var(--purple)}
-.section{padding-top:34px;scroll-margin-top:132px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:16px}.section-head h2{font-family:Fraunces,serif;margin:0;color:var(--purple);font-size:34px}.section-head p{margin:0;color:var(--muted);font-size:11px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
-.product{display:flex;min-height:150px;background:white;border:1px solid #ead7bd;border-radius:20px;overflow:hidden;box-shadow:0 7px 22px rgba(82,37,68,.06);transition:.2s}.product:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#d7b58b}
-.product-info{padding:17px;display:flex;flex-direction:column;flex:1;min-width:0}.product-tag{align-self:flex-start;padding:5px 8px;border-radius:999px;background:#ecf7f0;color:var(--green);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.product h3{font:800 18px/1.05 Fraunces,serif;color:var(--purple);margin:10px 0 6px}.product p{margin:0;color:var(--muted);font-size:11px;line-height:1.42}.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:14px}.price{font-weight:900;color:var(--green)}.add{width:36px;height:36px;border-radius:12px;background:var(--purple);color:#fff;display:grid;place-items:center}
-.color-block{width:112px;flex:none;display:grid;place-items:center;font-size:44px;background:linear-gradient(145deg,#fae8c8,#f6d4a9)}
-.product[data-cat="acai"] .color-block{background:linear-gradient(145deg,#8d337b,#58214f)}
-.product[data-cat="pizzas"] .color-block{background:linear-gradient(145deg,#ffe1bd,#ffb169)}
-.product[data-cat="bebidas"] .color-block{background:linear-gradient(145deg,#d9f1df,#a2dfb9)}
-.feature{margin:34px 0 4px;padding:24px;border-radius:24px;background:linear-gradient(135deg,#f8e6c6,#fff5e1);border:1px solid #efd2a8;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}.feature h3{font:800 27px/1 Fraunces,serif;color:var(--purple);margin:0 0 8px}.feature p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.feature b{font-size:34px;color:var(--green)}
-.overlay{position:fixed;inset:0;z-index:60;background:rgba(42,20,39,.58);display:none}.overlay.show{display:block}.sheet{position:absolute;left:0;right:0;bottom:0;max-height:92vh;overflow:auto;background:#fffdf9;border-radius:28px 28px 0 0}.sheet-inner{max-width:650px;margin:auto;padding:22px 18px 32px}.sheet-top{display:flex;justify-content:space-between;align-items:center;gap:12px}.sheet-top h2{font:800 30px/1 Fraunces,serif;color:var(--purple);margin:0}.close{width:38px;height:38px;border-radius:12px;background:var(--cream);color:var(--purple);display:grid;place-items:center}
-.detail-title{margin:22px 0 6px;font:800 25px/1.08 Fraunces,serif;color:var(--purple)}.detail-desc{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.field{margin-top:22px}.field>strong{display:block;margin-bottom:9px;color:var(--ink);font-size:12px}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.choice{padding:12px;text-align:left;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink)}.choice.selected{border-color:var(--purple);background:#f9edf6;color:var(--purple)}.choice b{display:block}.choice small{color:var(--muted)}
-.note{width:100%;min-height:74px;resize:vertical;border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff;color:var(--ink)}
-.primary{width:100%;margin-top:22px;padding:16px;border-radius:14px;background:var(--purple);color:white;font-weight:900}.primary.green{background:var(--green)}
-.cart-list{display:grid;gap:10px;margin-top:18px}.cart-item{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff}.cart-main{display:flex;justify-content:space-between;gap:12px}.cart-main h4{margin:0 0 5px;color:var(--purple)}.cart-main p{margin:0;color:var(--muted);font-size:10px}.cart-controls{display:flex;align-items:center;gap:7px;margin-top:12px}.cart-controls button{width:30px;height:30px;border-radius:9px;background:var(--cream);color:var(--purple)}.remove{margin-left:auto!important;width:auto!important;padding:0 7px!important;background:transparent!important;color:#a34f61!important}.total{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:15px;border-top:1px solid var(--line);font-weight:800}.total strong{font-size:22px;color:var(--green)}
+:root{--purple:#70245f;--purple2:#8d3179;--green:#159c63;--orange:#ff6f18;--cream:#fff0cf;--cream2:#f7dfba;--ink:#30152d;--muted:#776273;--line:#ead4b5;--white:#fffdf9;--shadow:0 18px 48px rgba(86,36,72,.15);--red:#b84050}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--white);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif}button,input,textarea{font:inherit}button{border:0;cursor:pointer}img{display:block;max-width:100%}
+.topbar{position:sticky;top:0;z-index:30;background:rgba(255,253,249,.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(112,36,95,.1)}.topbar-inner{max-width:1180px;margin:auto;padding:11px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}.brand img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 5px 14px #70245f24}.brand-copy{min-width:0}.brand strong{display:block;font:800 19px/1 Fraunces,serif;color:var(--purple);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand small{color:var(--green);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.actions{display:flex;align-items:center;gap:9px}.status{display:none;align-items:center;gap:6px;font-size:11px;font-weight:800;color:var(--green)}.status.closed{color:var(--red)}.status i{width:8px;height:8px;border-radius:50%;background:currentColor}.cart-btn{position:relative;width:44px;height:44px;border-radius:14px;background:var(--cream);color:var(--purple);display:grid;place-items:center}.cart-count{position:absolute;right:-4px;top:-4px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--orange);color:#fff;font-size:10px;font-weight:900;display:grid;place-items:center}
+.hero{min-height:330px;background:linear-gradient(90deg,rgba(65,17,56,.88),rgba(65,17,56,.45)),var(--hero) center/cover;color:#fff;display:flex;align-items:flex-end}.hero-inner{max-width:1180px;width:100%;margin:auto;padding:58px 18px 38px}.hero h1{margin:8px 0 10px;max-width:660px;font:800 clamp(45px,7vw,82px)/.9 Fraunces,serif;letter-spacing:-.04em}.hero h1 span{color:#8ae4af}.hero p{max-width:610px;margin:0;color:#f3e6ef;line-height:1.55;font-size:14px}.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#b6efca}
+.wrap{max-width:1180px;margin:auto;padding:0 18px 120px}.categories{position:sticky;top:71px;z-index:20;display:flex;gap:8px;overflow:auto;margin:0 -18px;padding:12px 18px;background:rgba(255,253,249,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(112,36,95,.08)}.categories::-webkit-scrollbar{display:none}.cat{flex:none;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--purple);font-size:12px;font-weight:800}.cat.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+.section{padding-top:34px;scroll-margin-top:130px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:15px}.section-head h2{font:800 34px/1 Fraunces,serif;color:var(--purple);margin:0}.section-head small{color:var(--muted);font-size:11px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.product{min-height:145px;display:flex;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:#fff;box-shadow:0 7px 22px rgba(82,37,68,.06);transition:.2s}.product:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.product-copy{flex:1;min-width:0;padding:16px;display:flex;flex-direction:column}.tag{align-self:flex-start;padding:5px 8px;border-radius:999px;background:#edf8f1;color:var(--green);font-size:9px;font-weight:900;text-transform:uppercase}.product h3{margin:9px 0 5px;font:800 18px/1.08 Fraunces,serif;color:var(--purple)}.product p{margin:0;color:var(--muted);font-size:11px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:13px}.price{font-size:14px;font-weight:900;color:var(--green)}.add{width:36px;height:36px;border-radius:12px;background:var(--purple);color:#fff;display:grid;place-items:center}.thumb{width:112px;flex:none;background:linear-gradient(145deg,#f8e2bf,#f2cfa3);display:grid;place-items:center;overflow:hidden}.thumb img{width:100%;height:100%;object-fit:cover}.thumb span{font-size:43px}
+.notice{margin:28px 0 0;padding:16px;border:1px solid #edd4ae;border-radius:18px;background:#fff4df;color:#6a4c62;font-size:12px;line-height:1.5}.notice strong{color:var(--purple)}
+.overlay{position:fixed;z-index:60;inset:0;background:rgba(42,20,39,.58);display:none}.overlay.show{display:block}.sheet{position:absolute;left:0;right:0;bottom:0;max-height:92vh;overflow:auto;background:#fffdf9;border-radius:28px 28px 0 0}.sheet-inner{max-width:680px;margin:auto;padding:22px 18px 32px}.sheet-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.sheet-top h2{margin:0;font:800 29px/1 Fraunces,serif;color:var(--purple)}.close{width:38px;height:38px;border-radius:12px;background:var(--cream);color:var(--purple);display:grid;place-items:center}.detail-title{margin:22px 0 6px;font:800 25px/1.08 Fraunces,serif;color:var(--purple)}.detail-desc{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.field{margin-top:21px}.field>strong{display:block;margin-bottom:9px;font-size:12px}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.choice{padding:12px;text-align:left;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink)}.choice.selected{border-color:var(--purple);background:#f9edf6;color:var(--purple)}.choice b{display:block;font-size:12px}.choice small{display:block;color:var(--muted);margin-top:3px;font-size:10px}.note,.input{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff;color:var(--ink);outline:none}.note{min-height:74px;resize:vertical}.input:focus,.note:focus{border-color:var(--purple);box-shadow:0 0 0 3px #70245f12}.primary{width:100%;margin-top:20px;padding:15px;border-radius:14px;background:var(--purple);color:#fff;font-weight:900}.primary.green{background:var(--green)}.secondary{width:100%;margin-top:9px;padding:12px;border-radius:12px;background:var(--cream);color:var(--purple);font-weight:800}
+.qtyline{display:flex;align-items:center;gap:10px}.qtybtn{width:36px;height:36px;border-radius:10px;background:var(--cream);color:var(--purple);font-weight:900}.qtyline b{min-width:25px;text-align:center}
+.cart-list{display:grid;gap:10px;margin-top:18px}.cart-item{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff}.cart-main{display:flex;justify-content:space-between;gap:12px}.cart-main h4{margin:0 0 5px;color:var(--purple)}.cart-main p{margin:0;color:var(--muted);font-size:10px;line-height:1.4}.cart-main strong{white-space:nowrap;color:var(--green)}.cart-controls{display:flex;align-items:center;gap:7px;margin-top:12px}.cart-controls button{width:30px;height:30px;border-radius:9px;background:var(--cream);color:var(--purple)}.remove{margin-left:auto!important;width:auto!important;padding:0 7px!important;background:transparent!important;color:#a34f61!important}.total{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:15px;border-top:1px solid var(--line);font-weight:800}.total strong{font-size:22px;color:var(--green)}
+.checkout-grid{display:grid;gap:14px;margin-top:20px}.option-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.opt{padding:11px 8px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--muted);font-size:11px;font-weight:800}.opt.selected{background:var(--purple);color:#fff;border-color:var(--purple)}
 .cart-bar{position:fixed;z-index:40;left:14px;right:14px;bottom:14px;max-width:650px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 10px 9px 15px;border-radius:17px;background:var(--purple);color:white;box-shadow:0 14px 35px rgba(67,25,58,.3);transform:translateY(140%);transition:.25s}.cart-bar.show{transform:none}.cart-bar strong{font-size:12px}.cart-bar small{display:block;color:#efd8ea;font-size:10px}.cart-bar button{padding:12px 14px;border-radius:11px;background:white;color:var(--purple);font-size:11px;font-weight:900}
-.toast{position:fixed;top:88px;left:50%;z-index:90;transform:translate(-50%,-15px);opacity:0;pointer-events:none;background:var(--ink);color:white;padding:10px 14px;border-radius:10px;font-size:11px;font-weight:800;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
-.footer{margin-top:52px;padding:26px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:11px}.footer strong{color:var(--purple)}
-@media(max-width:760px){.hero-inner{grid-template-columns:1fr;padding-top:34px}.hero-card{min-height:230px}.grid{grid-template-columns:1fr}.feature{grid-template-columns:1fr}.color-block{width:90px}.footer{flex-direction:column}}
-@media(min-width:760px){.sheet{left:50%;right:auto;bottom:22px;width:min(650px,calc(100% - 36px));transform:translateX(-50%);border-radius:26px}}
+.toast{position:fixed;top:86px;left:50%;z-index:90;transform:translate(-50%,-15px);opacity:0;pointer-events:none;background:var(--ink);color:white;padding:10px 14px;border-radius:10px;font-size:11px;font-weight:800;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}.loading{padding:70px 0;text-align:center;color:var(--muted)}.footer{margin-top:55px;padding:26px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;color:var(--muted);font-size:11px}.footer strong{color:var(--purple)}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.hero{min-height:285px}.thumb{width:90px}.status{display:none}.option-row{grid-template-columns:1fr}.footer{flex-direction:column}}
+@media(min-width:760px){.status{display:flex}.sheet{left:50%;right:auto;bottom:22px;width:min(680px,calc(100% - 36px));transform:translateX(-50%);border-radius:26px}}
 </style>
 </head>
 <body>
 <header class="topbar"><div class="topbar-inner">
-  <div class="brand"><div class="brand-seal">IA</div><div><strong>Império do Açaí</strong><small>Cardápio digital</small></div></div>
-  <button class="cart-btn" id="cart-top" aria-label="Abrir carrinho"><i data-lucide="shopping-bag"></i><span class="cart-count" id="cart-count">0</span></button>
+  <div class="brand"><img id="brand-logo" alt="Império do Açaí"><div class="brand-copy"><strong id="brand-name">Império do Açaí</strong><small>Cardápio digital</small></div></div>
+  <div class="actions"><div class="status" id="status"><i></i><span>Carregando...</span></div><button class="cart-btn" id="cart-top"><i data-lucide="shopping-bag"></i><span class="cart-count" id="cart-count">0</span></button></div>
 </div></header>
 
-<section class="hero"><div class="hero-inner">
-  <div>
-    <div class="eyebrow"><i data-lucide="crown" size="16"></i> Sabor de verdade</div>
-    <h1>Seu pedido no <span>Império.</span></h1>
-    <p>Açaí, hambúrgueres, pizzas, kebabs, sanduíches, combos e bebidas em um cardápio simples, rápido e pensado para celular.</p>
-  </div>
-  <div class="hero-card"><div class="cup">🥤</div><h3>Açaí do seu jeito</h3><p>Escolha o tamanho, até 4 acompanhamentos e monte sua combinação favorita.</p><div class="chips"><span>247 ml</span><span>356 ml</span><span>480 ml</span><span>até 4 acompanhamentos</span></div></div>
-</div></section>
+<section class="hero" id="hero"><div class="hero-inner"><div class="eyebrow"><i data-lucide="crown" size="16"></i> Império do Açaí</div><h1>Seu pedido no <span>Império.</span></h1><p>Açaí, hambúrgueres, pizzas, kebabs, combos, sanduíches, sucos, refrigerantes e sobremesas geladas.</p></div></section>
 
 <main class="wrap">
 <nav class="categories" id="categories"></nav>
-<div class="feature"><div><h3>Açaí com creme de Ninho ou Cupuaçu</h3><p>Escolha o tamanho e personalize com até quatro acompanhamentos.</p></div><b>a partir de R$ 13</b></div>
-<div id="menu"></div>
-<footer class="footer"><div><strong>Império do Açaí</strong><br>Disk Delivery: 99209-9937</div><div>@imperiodoacaisenamadureira</div></footer>
+<div class="notice"><strong>Cardápio oficial.</strong> Produtos, preços e opções carregados diretamente do sistema do Império do Açaí.</div>
+<div id="menu"><div class="loading">Carregando cardápio...</div></div>
+<footer class="footer"><div><strong id="footer-name">Império do Açaí</strong><br><span id="footer-phone"></span></div><div id="footer-instagram"></div></footer>
 </main>
 
 <div class="cart-bar" id="cart-bar"><div><strong id="bar-label">Seu pedido</strong><small id="bar-total">R$ 0,00</small></div><button id="bar-open">Ver pedido</button></div>
@@ -86,154 +51,6 @@ button,input,textarea{font:inherit}button{cursor:pointer;border:0}img{display:bl
 <div class="overlay" id="cart-overlay"><div class="sheet"><div class="sheet-inner" id="cart-sheet"></div></div></div>
 <div class="toast" id="toast"></div>
 
-<script>
-const CATEGORIES=[
-  ["acai","Açaí"],
-  ["burguer","Burguer"],
-  ["pizzas","Pizzas"],
-  ["kebab","Kebab"],
-  ["fritas","Batata Fritas"],
-  ["combos","Combos"],
-  ["sanduiches","Sanduíches"],
-  ["sucos","Sucos"],
-  ["bebidas","Refrigerantes"]
-];
-
-const PRODUCTS=[
-  {id:"acai",cat:"acai",name:"Açaí",desc:"Açaí com creme de Ninho ou Cupuaçu. Escolha até 4 acompanhamentos.",sizes:[["Pequeno · 247 ml",13],["Médio · 356 ml",18],["Grande · 480 ml",20]],type:"acai",emoji:"🥤"},
-  {id:"imperio",cat:"burguer",name:"Império",price:26,desc:"Pão brioche com manteiga, hambúrguer 150g, creme cheddar, alface e fritas crocante.",emoji:"🍔"},
-  {id:"yaco",cat:"burguer",name:"Yaco",price:23,desc:"Pão brioche, banana frita, hambúrguer 150g, creme cheddar e alface.",emoji:"🍔"},
-  {id:"fabuloso",cat:"burguer",name:"Fabuloso",price:24,desc:"Pão brioche, hambúrguer 150g, creme cheddar, ovo e alface.",emoji:"🍔"},
-  {id:"espetacular",cat:"burguer",name:"Espetacular",price:30,desc:"Pão brioche, alface, cebola roxa, hambúrguer duplo 150g e creme cheddar duplo.",emoji:"🍔"},
-  {id:"quero-mais",cat:"burguer",name:"Quero Mais",price:25,desc:"Pão brioche, alface, tomate, cebola roxa caramelizada, hambúrguer 150g, mussarela, creme cheddar e bacon.",emoji:"🍔"},
-  {id:"classico",cat:"burguer",name:"Clássico",price:20,desc:"Pão brioche, hambúrguer 150g e mussarela.",emoji:"🍔"},
-  {id:"pizza-acreana",cat:"pizzas",name:"Acreana",desc:"Molho de tomate, mussarela, banana frita, leite condensado e canela em pó.",sizes:[["M",60],["G",70]],type:"pizza",emoji:"🍕"},
-  {id:"pizza-bacon",cat:"pizzas",name:"Bacon",desc:"Molho de tomate, mussarela, bacon, milho verde, cebola e orégano.",sizes:[["M",65],["G",70]],type:"pizza",emoji:"🍕"},
-  {id:"pizza-calabresa",cat:"pizzas",name:"Calabresa",desc:"Mussarela, calabresa, cebola e orégano.",sizes:[["M",60],["G",75]],type:"pizza",emoji:"🍕"},
-  {id:"pizza-file",cat:"pizzas",name:"Filé com Fritas",desc:"Mussarela, filé em tiras, orégano e batata frita.",sizes:[["M",90],["G",105]],type:"pizza",emoji:"🍕"},
-  {id:"pizza-frango",cat:"pizzas",name:"Frango",desc:"Frango desfiado, mussarela e orégano.",sizes:[["M",60],["G",70]],type:"pizza",emoji:"🍕"},
-  {id:"kebab-file",cat:"kebab",name:"Kebab Filé",price:35,desc:"Kebab de filé.",emoji:"🌯"},
-  {id:"kebab-calabresa",cat:"kebab",name:"Kebab Calabresa",price:32,desc:"Kebab de calabresa.",emoji:"🌯"},
-  {id:"kebab-bacon",cat:"kebab",name:"Kebab Bacon",price:32,desc:"Kebab de bacon.",emoji:"🌯"},
-  {id:"kebab-banana",cat:"kebab",name:"Kebab Banana",price:32,desc:"Kebab de banana.",emoji:"🌯"},
-  {id:"frita-simples",cat:"fritas",name:"Porção 400g Simples",price:35,desc:"Batata frita com molho rosê.",emoji:"🍟"},
-  {id:"frita-bacon",cat:"fritas",name:"Batata Frita com Bacon e Creme Cheddar",price:45,desc:"Batata frita com bacon e creme cheddar.",emoji:"🍟"},
-  {id:"combo-casal",cat:"combos",name:"Casal",price:49.99,desc:"2 Burguer Clássico + 2 Refri Lata 269ml + 2 porções de 100g de fritas.",emoji:"👑"},
-  {id:"combo-familia",cat:"combos",name:"Família",price:99.99,desc:"4 Burguer Império + 1 Refri 1,5L.",emoji:"👑"},
-  {id:"combo-best",cat:"combos",name:"Best Friends",price:149.99,desc:"6 Burguer Clássico + 1 Refri 2L + 6 porções de fritas de 100g.",emoji:"👑"},
-  {id:"x-bauru",cat:"sanduiches",name:"X-Bauru",price:14,desc:"Hambúrguer, queijo, presunto, batata palha e salada.",emoji:"🥪"},
-  {id:"x-americano",cat:"sanduiches",name:"X-Americano",price:12,desc:"Hambúrguer, queijo, presunto e batata palha.",emoji:"🥪"},
-  {id:"x-banana",cat:"sanduiches",name:"X-Banana",price:18,desc:"Hambúrguer, banana frita, queijo, presunto, alface, tomate, batata palha e ovo.",emoji:"🥪"},
-  {id:"x-calabresa",cat:"sanduiches",name:"X-Calabresa Especial",price:18,desc:"Hambúrguer, calabresa, ovos, queijo, presunto, alface, tomate e batata palha.",emoji:"🥪"},
-  {id:"x-bacon",cat:"sanduiches",name:"X-Bacon Especial",price:19,desc:"Hambúrguer, bacon, ovos, queijo, presunto, alface, tomate e batata palha.",emoji:"🥪"},
-  {id:"x-file",cat:"sanduiches",name:"X-Filé",price:25,desc:"Filé, ovos, queijo, presunto, alface, tomate e batata palha.",emoji:"🥪"},
-  {id:"x-tudo",cat:"sanduiches",name:"X-Tudo",price:25,desc:"Hambúrguer, bacon, calabresa, salsicha, ovos, queijo, presunto, alface, tomate e batata palha.",emoji:"🥪"},
-  {id:"suco-maracuja",cat:"sucos",name:"Maracujá",price:12,desc:"Suco de maracujá.",emoji:"🥭"},
-  {id:"suco-acerola",cat:"sucos",name:"Acerola",price:12,desc:"Suco de acerola.",emoji:"🍹"},
-  {id:"suco-abacaxi",cat:"sucos",name:"Abacaxi c/ Hortelã",price:12,desc:"Suco de abacaxi com hortelã.",emoji:"🍍"},
-  {id:"suco-maracuja-couve",cat:"sucos",name:"Maracujá c/ Couve",price:12,desc:"Suco de maracujá com couve.",emoji:"🍹"},
-  {id:"suco-abacaxi-couve",cat:"sucos",name:"Abacaxi c/ Hortelã e Couve",price:12,desc:"Suco de abacaxi com hortelã e couve.",emoji:"🍍"},
-  {id:"refri-1l",cat:"bebidas",name:"Refrigerante 1L",price:12,desc:"Escolha o sabor na observação.",emoji:"🥤"},
-  {id:"refri-600",cat:"bebidas",name:"Refrigerante 600ml",price:8,desc:"Escolha o sabor na observação.",emoji:"🥤"},
-  {id:"refri-lata",cat:"bebidas",name:"Refrigerante Lata 350ml",price:6,desc:"Escolha o sabor na observação.",emoji:"🥤"},
-  {id:"agua",cat:"bebidas",name:"Água sem Gás",price:3,desc:"Água sem gás.",emoji:"💧"},
-  {id:"agua-gas",cat:"bebidas",name:"Água com Gás",price:4,desc:"Água com gás.",emoji:"💧"},
-  {id:"h2o",cat:"bebidas",name:"H2O",price:7,desc:"Bebida H2O.",emoji:"🥤"}
-];
-
-const ACCOMP=["Granola","Leite Condensado","Creme de Leite","Sucrilhos","Amendoim","Leite em Pó","Farinha Láctea"];
-const A_EXTRA=[["Ovomaltine",3],["Casquinha",3],["M&M",5],["Biju",3]];
-const BURGER_EXTRA=[["Banana Frita",5],["Bacon",5],["Mussarela e Presunto",5],["Maionese",5],["Calabresa",3],["Queijo Cheddar",5],["Salada",3],["Ovo",3]];
-let cart=[],active=null,config={size:0,accomp:[],extras:[],note:""};
-
-const money=v=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(v);
-const byId=id=>PRODUCTS.find(p=>p.id===id);
-function productPrice(p){return p.sizes?Number(p.sizes[config.size]?.[1]||0):Number(p.price||0)}
-function renderMenu(){
-  document.querySelector("#categories").innerHTML=CATEGORIES.map(([id,label],i)=>`<button class="cat ${i===0?"active":""}" data-cat="${id}">${label}</button>`).join("");
-  document.querySelector("#menu").innerHTML=CATEGORIES.map(([id,label])=>{
-    const rows=PRODUCTS.filter(p=>p.cat===id);
-    return `<section class="section" id="section-${id}"><div class="section-head"><h2>${label}</h2><p>${rows.length} opções</p></div><div class="grid">${rows.map(p=>`
-      <article class="product" data-cat="${p.cat}">
-        <div class="product-info"><span class="product-tag">${label}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="product-bottom"><span class="price">${p.sizes?"a partir de "+money(Math.min(...p.sizes.map(x=>x[1]))):money(p.price)}</span><button class="add" data-open="${p.id}" aria-label="Adicionar ${p.name}"><i data-lucide="plus"></i></button></div></div>
-        <div class="color-block">${p.emoji||"🍴"}</div>
-      </article>`).join("")}</div></section>`;
-  }).join("");
-  lucide.createIcons();
-}
-function openProduct(id){
-  active=byId(id);config={size:0,accomp:[],extras:[],note:""};
-  renderProductSheet();
-  document.querySelector("#product-overlay").classList.add("show");
-}
-function renderProductSheet(){
-  if(!active)return;
-  const p=active,price=productPrice(p)+config.extras.reduce((s,x)=>s+x.price,0);
-  let fields="";
-  if(p.sizes)fields+=`<div class="field"><strong>Escolha o tamanho</strong><div class="choices">${p.sizes.map((x,i)=>`<button class="choice ${config.size===i?"selected":""}" data-size="${i}"><b>${x[0]}</b><small>${money(x[1])}</small></button>`).join("")}</div></div>`;
-  if(p.type==="acai"){
-    fields+=`<div class="field"><strong>Acompanhamentos · escolha até 4</strong><div class="choices">${ACCOMP.map(name=>`<button class="choice ${config.accomp.includes(name)?"selected":""}" data-accomp="${name}"><b>${name}</b><small>incluso</small></button>`).join("")}</div></div>`;
-    fields+=`<div class="field"><strong>Adicionais</strong><div class="choices">${A_EXTRA.map(([name,val])=>`<button class="choice ${config.extras.some(x=>x.name===name)?"selected":""}" data-extra="${name}" data-extra-price="${val}"><b>${name}</b><small>+${money(val)}</small></button>`).join("")}</div></div>`;
-  }else if(p.cat==="burguer"){
-    fields+=`<div class="field"><strong>Adicionais</strong><div class="choices">${BURGER_EXTRA.map(([name,val])=>`<button class="choice ${config.extras.some(x=>x.name===name)?"selected":""}" data-extra="${name}" data-extra-price="${val}"><b>${name}</b><small>+${money(val)}</small></button>`).join("")}</div></div>`;
-  }
-  document.querySelector("#product-sheet").innerHTML=`
-    <div class="sheet-top"><h2>Personalizar</h2><button class="close" data-close="product-overlay"><i data-lucide="x"></i></button></div>
-    <h3 class="detail-title">${p.name}</h3><p class="detail-desc">${p.desc}</p>
-    ${fields}
-    <div class="field"><strong>Observação</strong><textarea class="note" id="note" placeholder="Ex.: sem cebola, refrigerante Coca-Cola...">${config.note}</textarea></div>
-    <button class="primary" id="add-cart">Adicionar · ${money(price)}</button>`;
-  lucide.createIcons();
-}
-function addCart(){
-  const p=active;if(!p)return;
-  config.note=document.querySelector("#note")?.value.trim()||"";
-  const unit=productPrice(p)+config.extras.reduce((s,x)=>s+x.price,0);
-  cart.push({id:p.id,name:p.name,qty:1,unit,size:p.sizes?p.sizes[config.size][0]:"",accomp:[...config.accomp],extras:config.extras.map(x=>({...x})),note:config.note});
-  document.querySelector("#product-overlay").classList.remove("show");updateCart();toast("Adicionado ao pedido");
-}
-function detail(item){
-  const a=[];if(item.size)a.push(item.size);if(item.accomp.length)a.push("Acompanhamentos: "+item.accomp.join(", "));if(item.extras.length)a.push("Adicionais: "+item.extras.map(x=>x.name).join(", "));if(item.note)a.push("Obs.: "+item.note);return a.join(" · ");
-}
-function updateCart(){
-  const qty=cart.reduce((s,x)=>s+x.qty,0),total=cart.reduce((s,x)=>s+x.unit*x.qty,0);
-  document.querySelector("#cart-count").textContent=qty;
-  document.querySelector("#bar-label").textContent=qty===1?"1 item no pedido":qty+" itens no pedido";
-  document.querySelector("#bar-total").textContent=money(total);
-  document.querySelector("#cart-bar").classList.toggle("show",qty>0);
-}
-function renderCart(){
-  const total=cart.reduce((s,x)=>s+x.unit*x.qty,0);
-  document.querySelector("#cart-sheet").innerHTML=`
-    <div class="sheet-top"><h2>Seu pedido</h2><button class="close" data-close="cart-overlay"><i data-lucide="x"></i></button></div>
-    ${cart.length?`<div class="cart-list">${cart.map((x,i)=>`<div class="cart-item"><div class="cart-main"><div><h4>${x.name}</h4><p>${detail(x)||"Sem alterações"}</p></div><strong>${money(x.unit*x.qty)}</strong></div><div class="cart-controls"><button data-minus="${i}">−</button><b>${x.qty}</b><button data-plus="${i}">+</button><button class="remove" data-remove="${i}">Remover</button></div></div>`).join("")}</div><div class="total"><span>Total</span><strong>${money(total)}</strong></div><button class="primary green" id="copy-order">Copiar resumo do pedido</button><p style="font-size:10px;color:var(--muted);line-height:1.5">O cardápio já está montado. A integração de envio automático para o estabelecimento será conectada quando definirmos o backend próprio do Império do Açaí.</p>`:`<p style="color:var(--muted)">Seu pedido está vazio.</p>`}
-  `;
-  lucide.createIcons();
-}
-function orderText(){
-  const lines=["PEDIDO — IMPÉRIO DO AÇAÍ",""];
-  cart.forEach((x,i)=>{lines.push(`${i+1}. ${x.qty}x ${x.name} — ${money(x.unit*x.qty)}`);const d=detail(x);if(d)lines.push("   "+d)});
-  lines.push("",`TOTAL: ${money(cart.reduce((s,x)=>s+x.unit*x.qty,0))}`);return lines.join("\n");
-}
-async function copyOrder(){try{await navigator.clipboard.writeText(orderText());toast("Resumo copiado");}catch{toast("Não foi possível copiar")}}
-function toast(msg){const el=document.querySelector("#toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
-
-document.addEventListener("click",e=>{
-  const open=e.target.closest("[data-open]");if(open)return openProduct(open.dataset.open);
-  const close=e.target.closest("[data-close]");if(close)return document.querySelector("#"+close.dataset.close).classList.remove("show");
-  const cat=e.target.closest("[data-cat]");if(cat&&cat.classList.contains("cat")){document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x===cat));document.querySelector("#section-"+cat.dataset.cat)?.scrollIntoView({behavior:"smooth"});return}
-  const size=e.target.closest("[data-size]");if(size){config.note=document.querySelector("#note")?.value||"";config.size=Number(size.dataset.size);return renderProductSheet()}
-  const ac=e.target.closest("[data-accomp]");if(ac){config.note=document.querySelector("#note")?.value||"";const n=ac.dataset.accomp,i=config.accomp.indexOf(n);if(i>=0)config.accomp.splice(i,1);else if(config.accomp.length<4)config.accomp.push(n);else return toast("Escolha até 4 acompanhamentos");return renderProductSheet()}
-  const ex=e.target.closest("[data-extra]");if(ex){config.note=document.querySelector("#note")?.value||"";const n=ex.dataset.extra,i=config.extras.findIndex(x=>x.name===n);if(i>=0)config.extras.splice(i,1);else config.extras.push({name:n,price:Number(ex.dataset.extraPrice)});return renderProductSheet()}
-  if(e.target.closest("#add-cart"))return addCart();
-  if(e.target.closest("#cart-top")||e.target.closest("#bar-open")){renderCart();document.querySelector("#cart-overlay").classList.add("show");return}
-  const minus=e.target.closest("[data-minus]");if(minus){const i=Number(minus.dataset.minus);cart[i].qty--;if(cart[i].qty<=0)cart.splice(i,1);updateCart();renderCart();return}
-  const plus=e.target.closest("[data-plus]");if(plus){cart[Number(plus.dataset.plus)].qty++;updateCart();renderCart();return}
-  const remove=e.target.closest("[data-remove]");if(remove){cart.splice(Number(remove.dataset.remove),1);updateCart();renderCart();return}
-  if(e.target.closest("#copy-order"))return copyOrder();
-  if(e.target.classList.contains("overlay"))e.target.classList.remove("show");
-});
-renderMenu();updateCart();lucide.createIcons();
-</script>
+<script src="./app.js?v=20260927-1"></script>
 </body>
 </html>
