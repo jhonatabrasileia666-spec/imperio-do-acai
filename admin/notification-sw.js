@@ -1,6 +1,6 @@
-const CACHE_NAME='deliverylv-panel-v10-esfirras-global-toggle';
+const CACHE_NAME='imperio-panel-v10-esfirras-global-toggle';
 const APP_SHELL=['./','./index.html','./lv-updates.js?v=20260926-esfirras-global-toggle-v1','./manifest.webmanifest','./pwa-icon-192.svg','./pwa-icon-512.svg'];
-const PUSH_ACK_URL='https://nhvarlrbqbryrurpdwvp.supabase.co/functions/v1/lv-web-push';
+const PUSH_ACK_URL='https://xzhxqjgekqbyucdgtvra.supabase.co/functions/v1/imperio-web-push';
 
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_SHELL.map(url=>new Request(url,{cache:'reload'})))).then(()=>self.skipWaiting()));
@@ -9,7 +9,7 @@ self.addEventListener('install',event=>{
 self.addEventListener('activate',event=>{
   event.waitUntil((async()=>{
     const keys=await caches.keys();
-    await Promise.all(keys.filter(key=>key.startsWith('deliverylv-panel-')&&key!==CACHE_NAME).map(key=>caches.delete(key)));
+    await Promise.all(keys.filter(key=>key.startsWith('imperio-panel-')&&key!==CACHE_NAME).map(key=>caches.delete(key)));
     await self.clients.claim();
   })());
 });
