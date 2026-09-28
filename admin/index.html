@@ -516,28 +516,37 @@ window.LVAlerts=(()=>{
 </script>
 
 <script>
-  const SUPABASE_URL='https://nhvarlrbqbryrurpdwvp.supabase.co';
-  const SUPABASE_PUBLISHABLE_KEY='sb_publishable_0nKLavga7G2XF-Ckz34tbw_VNbqfdo1';
-  const PANEL_SESSION_KEY='deliverylv_panel_session';
-  const createPanelClient=token=>window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY,
-    token?{global:{headers:{'x-panel-session':token}}}:{}
-  );
+  const SUPABASE_URL='https://xzhxqjgekqbyucdgtvra.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY='sb_publishable_EDE6y5QWzz80ZPxjkP8CqA_l0nenLVj';
+  const PANEL_SESSION_KEY='imperio_panel_session';
+  const createPanelClient=()=>window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
   let panelToken=localStorage.getItem(PANEL_SESSION_KEY)||'';
   let panelProfile=null;
-  let db=createPanelClient(panelToken);
-  const publicDb=createPanelClient('');
+  let db=createPanelClient();
+  const publicDb=db;
   async function panelAuth(action,{login=null,password=null,newPassword=null}={}){
-    const client=action==='login'?publicDb:db;
-    const {data,error}=await client.rpc('lv_panel_auth',{
-      p_action:action,
-      p_login:login,
-      p_password:password,
-      p_new_password:newPassword
-    });
-    if(error)throw error;
-    return data;
+    if(action==='login'){
+      const {data,error}=await db.auth.signInWithPassword({email:login,password});
+      if(error)return {ok:false,message:'E-mail ou senha inválidos.'};
+      const ownerId='b00f611b-91f4-4856-aa92-722cbed75343';
+      if(data.user?.id!==ownerId){await db.auth.signOut();return {ok:false,message:'Esta conta não administra o Império do Açaí.'};}
+      return {ok:true,token:data.session?.access_token||'session',role:'owner',login:data.user.email};
+    }
+    if(action==='me'){
+      const {data,error}=await db.auth.getUser();
+      if(error||!data.user)return {ok:false,message:'Sessão encerrada.'};
+      if(data.user.id!=='b00f611b-91f4-4856-aa92-722cbed75343')return {ok:false,message:'Acesso não autorizado.'};
+      return {ok:true,role:'owner',login:data.user.email};
+    }
+    if(action==='logout'){await db.auth.signOut();return {ok:true};}
+    if(action==='change_password'){
+      const {data:u}=await db.auth.getUser();if(!u.user)return {ok:false,message:'Sessão encerrada.'};
+      const check=await db.auth.signInWithPassword({email:u.user.email,password});if(check.error)return {ok:false,message:'Senha atual incorreta.'};
+      const changed=await db.auth.updateUser({password:newPassword});if(changed.error)return {ok:false,message:changed.error.message};
+      return {ok:true,message:'Senha alterada com sucesso.'};
+    }
+    if(action==='create_owner')return {ok:false,message:'O acesso do lojista é gerenciado pelo Supabase Auth.'};
+    return {ok:false,message:'Ação não disponível.'};
   }
   const statusMeta={new:{label:'Novo pedido',next:null,nextLabel:''},accepted:{label:'Novo pedido',next:null,nextLabel:''},prep:{label:'Novo pedido',next:null,nextLabel:''},ready:{label:'Pronto',next:'delivery',nextLabel:'Saiu para entrega'},delivery:{label:'Saiu para entrega',next:null,nextLabel:'Confirmar pagamento'},done:{label:'Finalizado',next:null,nextLabel:'Finalizado'},cancelled:{label:'Recusado',next:null,nextLabel:'Recusado'}};
   let orders=[];let currentFilter='all';let historySearch='';let ordersChannel=null;let ordersRefreshTimer=null;let knownOrderIds=new Set();
@@ -809,9 +818,9 @@ window.LVAlerts=(()=>{
     const extension=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'');
     const unique=(crypto.randomUUID?crypto.randomUUID():String(Date.now()));
     const objectPath=`products/${unique}.${extension||'jpg'}`;
-    const{error}=await db.storage.from('product-images').upload(objectPath,file,{cacheControl:'3600',upsert:false,contentType:file.type});
+    const{error}=await db.storage.from('imagens').upload(objectPath,file,{cacheControl:'3600',upsert:false,contentType:file.type});
     if(error)throw error;
-    const{data}=db.storage.from('product-images').getPublicUrl(objectPath);
+    const{data}=db.storage.from('imagens').getPublicUrl(objectPath);
     return data?.publicUrl||'';
   }
   function collectProductSizes(){
@@ -1380,7 +1389,7 @@ window.LVAlerts=(()=>{
     document.querySelector('#remote-update-section').style.display='none';
     document.querySelector('#ai-providers-section').style.display='none';
     localStorage.removeItem(PANEL_SESSION_KEY);
-    db=createPanelClient('');
+    db=createPanelClient();
     document.querySelector('#account-modal').classList.remove('show');
     showLogin(message);
   }
@@ -1404,7 +1413,7 @@ window.LVAlerts=(()=>{
       }
       panelToken=result.token;
       localStorage.setItem(PANEL_SESSION_KEY,panelToken);
-      db=createPanelClient(panelToken);
+      db=createPanelClient();
       const me=await panelAuth('me');
       if(!me?.ok)throw new Error(me?.message||'Não foi possível validar a sessão.');
       status.textContent='';
@@ -1568,7 +1577,7 @@ window.LVAlerts=(()=>{
     lucide.createIcons();
     if(!panelToken){showLogin();return}
     try{
-      db=createPanelClient(panelToken);
+      db=createPanelClient();
       const me=await panelAuth('me');
       if(!me?.ok){await clearPanelSession({message:'Entre novamente para acessar o painel.'});return}
       await enterPanel(me);
@@ -1930,7 +1939,7 @@ window.LVAlerts=(()=>{
 (()=>{
   const VAPID_PUBLIC='BPGBg5ZSyN1I9D76RucxYKyYeWQU--jfQDpePfIpChaHj51ZV_GkQhgScvKaXIHHKYsVpZIjkWfBoDEi9tIqNp8';
   const ACK_URL='https://nhvarlrbqbryrurpdwvp.supabase.co/functions/v1/lv-web-push';
-  const PANEL_KEY='deliverylv_panel_session';
+  const PANEL_KEY='imperio_panel_session';
   const DRIVER_KEY='deliverylv_driver_session';
   const banner=document.querySelector('#lv-server-alert');
   let currentAlert=null;
