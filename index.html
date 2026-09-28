@@ -5,17 +5,17 @@
   <meta name="lv-updates-build" content="20260925-edge-manager-v1">
   <script src="./lv-updates.js?v=20260925-edge-manager-v1"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#11100f">
-  <title>Delivery LV | Cardápio</title>
+  <meta name="theme-color" content="#6f275f">
+  <title>Império do Açaí | Cardápio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@1.35.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0"></script>
   <style>
-    :root{--ink:#11100f;--ink-2:#191715;--paper:#f4eee5;--muted:#aaa29a;--line:#37322f;--orange:#ff5a16;--orange-2:#ff7b27;--cream:#fff9f2;--lime:#d9f15c;--shadow:0 22px 60px #0009}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--ink);color:var(--cream);font-family:Manrope,system-ui,sans-serif;font-size:15px}button{font:inherit;color:inherit;border:0;cursor:pointer}button:focus-visible{outline:3px solid var(--lime);outline-offset:3px}img{display:block;max-width:100%}
-    .shell{min-height:100vh;overflow-x:clip;overflow-y:visible}.topbar{position:sticky;top:0;z-index:20;background:#11100fe8;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff12}.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:1180px;margin:auto;padding:16px 20px}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--cream)}.brand-mark{width:42px;height:42px;display:grid;place-items:center;background:var(--orange);color:#16100c;border-radius:12px 12px 12px 3px;font-family:"Barlow Condensed";font-size:27px;font-weight:900;line-height:1}.brand-copy{line-height:.88}.brand-copy strong{display:block;font-family:"Barlow Condensed";font-size:26px;letter-spacing:.03em}.brand-copy small{color:var(--orange-2);font-size:9px;font-weight:800;letter-spacing:.17em}.top-actions{display:flex;align-items:center;gap:12px}.open-status{display:flex;align-items:center;gap:7px;color:#c9c4be;font-size:12px;font-weight:700}.status-dot{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px #d9f15c1c}.icon-btn{position:relative;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);background:#201d1a;border-radius:12px}.icon-btn:hover{border-color:var(--orange)}.count{position:absolute;top:-6px;right:-5px;min-width:19px;height:19px;padding:0 5px;display:grid;place-items:center;border-radius:10px;background:var(--orange);color:#fff;font-size:10px;font-weight:800}
+    :root{--ink:#2a1026;--ink-2:#3a1733;--paper:#fff0cf;--muted:#c9aebe;--line:#6f3b62;--orange:#f07a24;--orange-2:#ff9a3d;--cream:#fff7e7;--lime:#35b66f;--shadow:0 22px 60px #160c1588}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#2a1026 0%,#3b1734 58%,#241020 100%);color:var(--cream);font-family:Manrope,system-ui,sans-serif;font-size:15px}button{font:inherit;color:inherit;border:0;cursor:pointer}button:focus-visible{outline:3px solid var(--lime);outline-offset:3px}img{display:block;max-width:100%}
+    .shell{min-height:100vh;overflow-x:clip;overflow-y:visible}.topbar{position:sticky;top:0;z-index:20;background:#2a1026ee;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff12}.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:1180px;margin:auto;padding:16px 20px}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--cream)}.brand-mark{width:42px;height:42px;display:grid;place-items:center;background:var(--orange);color:#16100c;border-radius:12px 12px 12px 3px;font-family:"Barlow Condensed";font-size:27px;font-weight:900;line-height:1}.brand-copy{line-height:.88}.brand-copy strong{display:block;font-family:"Barlow Condensed";font-size:26px;letter-spacing:.03em}.brand-copy small{color:var(--orange-2);font-size:9px;font-weight:800;letter-spacing:.17em}.top-actions{display:flex;align-items:center;gap:12px}.open-status{display:flex;align-items:center;gap:7px;color:#c9c4be;font-size:12px;font-weight:700}.status-dot{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px #d9f15c1c}.icon-btn{position:relative;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);background:#201d1a;border-radius:12px}.icon-btn:hover{border-color:var(--orange)}.count{position:absolute;top:-6px;right:-5px;min-width:19px;height:19px;padding:0 5px;display:grid;place-items:center;border-radius:10px;background:var(--orange);color:#fff;font-size:10px;font-weight:800}
     main{max-width:1180px;margin:auto;padding:0 20px 130px}.hero{padding:38px 0 30px;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,390px);gap:28px;align-items:end}.eyebrow{color:var(--orange-2);font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}.hero h1{max-width:620px;margin:10px 0 14px;font-family:"Barlow Condensed";font-size:clamp(48px,8vw,86px);line-height:.85;letter-spacing:-.025em;text-transform:uppercase}.hero h1 em{color:var(--orange);font-style:normal}.hero p{max-width:520px;margin:0;color:var(--muted);line-height:1.65}.hero-visual{min-height:235px;position:relative;overflow:hidden;border:1px solid #ffffff18;border-radius:24px;background:url('https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=85') center/cover}.hero-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#11100f55,#11100f00 60%),linear-gradient(0deg,#11100faa,transparent 65%)}.hero-label{position:absolute;z-index:1;left:18px;bottom:16px;font-family:"Barlow Condensed";font-size:30px;text-transform:uppercase;line-height:.9}.hero-label span{display:block;color:var(--orange);font-size:14px;letter-spacing:.12em}
     .promo-showcase{width:100vw;margin-left:calc(50% - 50vw);padding:6px 0 28px;overflow:hidden}.promo-head{max-width:1180px;margin:0 auto 14px;padding:0 20px;display:flex;align-items:end;justify-content:space-between;gap:18px}.promo-head h2{margin:5px 0 0;font-family:"Barlow Condensed";font-size:38px;line-height:.92;text-transform:uppercase}.promo-head p{margin:0;color:var(--muted);font-size:11px}.promo-viewport{width:100%;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}.promo-track{display:flex;gap:12px;width:max-content;padding:2px 0;will-change:transform;animation:promoMarquee 34s linear infinite}.promo-track:hover{animation-play-state:paused}.promo-set{display:flex;gap:12px;flex:none}.promo-card{position:relative;width:282px;height:158px;flex:none;overflow:hidden;border:1px solid #ff5a1660;border-radius:18px;background:#211914;text-align:left;box-shadow:0 12px 30px #0005}.promo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}.promo-card:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#120d0acc 15%,#120d0a78 62%,#120d0a35)}.promo-card-copy{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:flex-start;padding:15px}.promo-pill{display:inline-flex;padding:5px 8px;border-radius:99px;background:var(--orange);color:#1b110b;font-size:9px;font-weight:900;letter-spacing:.06em}.promo-card h3{max-width:185px;margin:10px 0 4px;font-size:16px;line-height:1.05}.promo-card small{color:#ddd0c6;font-size:9px}.promo-prices{display:flex;align-items:baseline;gap:8px;margin-top:auto}.promo-prices del{color:#b5aaa1;font-size:11px}.promo-prices strong{color:#fff;font-family:"Barlow Condensed";font-size:25px;line-height:1}.promo-card:hover{border-color:var(--orange);transform:translateY(-2px)}.promo-price-old{margin-right:7px;color:#887f78;font-size:11px;font-weight:600}.product-copy .product-badge.promo-badge{background:#d9f15c18;border-color:#d9f15c88;color:var(--lime)}@keyframes promoMarquee{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 6px))}}@media(max-width:600px){.promo-showcase{padding-bottom:22px}.promo-head h2{font-size:33px}.promo-head p{display:none}.promo-card{width:245px;height:145px}.promo-card h3{max-width:160px}.promo-track{animation-duration:28s}}@media(prefers-reduced-motion:reduce){.promo-track{animation:none;transform:none;overflow-x:auto}}
     .menu-layout{display:block}.categories{position:sticky;top:77px;z-index:10;display:flex;gap:8px;margin:0 -20px;padding:12px 20px;background:#11100fe8;backdrop-filter:blur(16px);overflow:auto;border-bottom:1px solid #ffffff0d}.categories::-webkit-scrollbar{display:none}.category-kicker{display:none}.category{flex:none;display:flex;align-items:center;gap:8px;padding:11px 17px;border-radius:99px;background:transparent;border:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:800}.category svg{width:16px;height:16px}.category.active{background:var(--orange);color:#1b110b;border-color:var(--orange)}.menu-sections{min-width:0}.section{scroll-margin-top:100px}
@@ -157,12 +157,35 @@
   @media(max-width:560px){.order-followup-inner{align-items:stretch;flex-direction:column}.order-followup button{width:100%}}
 </style>
 </style>
+
+<style id="imperio-identity">
+  .brand-mark{
+    background-image:url("https://xzhxqjgekqbyucdgtvra.supabase.co/storage/v1/object/public/imagens/b00f611b-91f4-4856-aa92-722cbed75343/estabelecimento/logo.jpg?v=1789999547423")!important;
+    background-size:cover!important;background-position:center!important;
+    color:transparent!important;border:2px solid #fff3!important;
+    box-shadow:0 8px 24px #0005!important;border-radius:50%!important;
+  }
+  .brand-copy strong{color:#fff7e7!important}
+  .brand-copy small{color:#65d88e!important}
+  .hero{
+    background:
+      linear-gradient(90deg,#2a1026e8 0%,#3b1734b8 48%,#2a102685 100%),
+      url("https://xzhxqjgekqbyucdgtvra.supabase.co/storage/v1/object/public/imagens/b00f611b-91f4-4856-aa92-722cbed75343/estabelecimento/banner.jpg?v=1789999547783") center/cover!important;
+  }
+  .hero em,.eyebrow{color:#65d88e!important}
+  .hero-label{background:#6f275fe6!important;border-color:#ffffff22!important}
+  .category.active,.button.primary,.checkout-button,.voice-button{background:#6f275f!important}
+  .category.active{color:#fff7e7!important}
+  .product-card:hover,.pizza-card:hover{border-color:#9a4d88!important}
+  .price,.product-price{color:#65d88e!important}
+  .topbar{box-shadow:0 8px 26px #180d1740}
+</style>
 </head>
 <body>
   <div class="shell">
-    <header class="topbar"><div class="topbar-inner"><a class="brand" href="#pizzas" aria-label="Delivery LV início"><span class="brand-mark">LV</span><span class="brand-copy"><strong>DELIVERY</strong><small>pizzaria & esfiharia</small></span></a><div class="top-actions"><span class="open-status" id="store-status"><i class="status-dot"></i><span id="store-status-text">Verificando...</span></span><button class="icon-btn" id="open-cart" aria-label="Abrir carrinho"><i data-lucide="shopping-bag"></i><span class="count" id="cart-count">0</span></button></div></div></header>
+    <header class="topbar"><div class="topbar-inner"><a class="brand" href="#pizzas" aria-label="Império do Açaí início"><span class="brand-mark">IA</span><span class="brand-copy"><strong>IMPÉRIO</strong><small>AÇAÍ • BURGUER • PIZZAS</small></span></a><div class="top-actions"><span class="open-status" id="store-status"><i class="status-dot"></i><span id="store-status-text">Verificando...</span></span><button class="icon-btn" id="open-cart" aria-label="Abrir carrinho"><i data-lucide="shopping-bag"></i><span class="count" id="cart-count">0</span></button></div></div></header>
     <main>
-      <section class="hero"><div><span class="eyebrow">Seu pedido, do seu jeito</span><h1>Pizza quente.<br><em>Pedido fácil.</em></h1><p>Escolha seus sabores, personalize cada detalhe e finalize seu pedido em poucos toques.</p></div><div class="hero-visual"><div class="hero-label"><span>feito na hora</span>Delivery LV</div></div></section>
+      <section class="hero"><div><span class="eyebrow">O sabor do seu jeito</span><h1>Seu pedido no<br><em>Império.</em></h1><p>Açaí, burgers, pizzas, kebabs, combos e muito mais. Escolha, personalize e peça em poucos toques.</p></div><div class="hero-visual"><div class="hero-label"><span>feito do seu jeito</span>Império do Açaí</div></div></section>
       <section class="order-followup" id="order-followup" hidden>
         <div class="order-followup-inner">
           <div><strong id="order-followup-title">Pedido enviado</strong><span id="order-followup-copy">Quer adicionar mais alguma coisa?</span></div>
@@ -175,7 +198,7 @@
         <section class="section" id="esfirras"><div class="section-head"><div><span class="eyebrow">Salgadas e doces</span><h2>Esfirras</h2></div><p>Escolha suas favoritas</p></div><div class="subsection">Produtos da casa</div><div id="savory-list"></div><div class="subsection">Doces</div><div id="sweet-list"></div></section>
         <section class="section" id="bebidas"><div class="section-head"><div><span class="eyebrow">Para acompanhar</span><h2>Bebidas</h2></div></div><div id="drink-list"></div></section>
       </div></div>
-      <footer class="contact"><div><strong>Delivery LV</strong><span>Faça seu pedido pelo cardápio online da Delivery LV.</span></div><div>Pedidos pelo telefone<br><a href="tel:+5568992591250">(68) 99259-1250</a></div></footer>
+      <footer class="contact"><div><strong>Império do Açaí</strong><span>Faça seu pedido pelo cardápio online da Império do Açaí.</span></div><div>Disk Delivery<br><a href="tel:+5568992099937">(68) 99209-9937</a></div></footer>
     </main>
     <button class="voice-button" id="voice-toggle" aria-label="Pedir por voz"><i data-lucide="mic"></i></button>
     <div class="voice-panel" id="voice-panel" aria-live="polite">
@@ -628,7 +651,7 @@
         return `• ${item.qty}x ${item.name}${detalhes.length?` (${detalhes.join(' · ')})`:''} — ${money(item.price*item.qty)}`;
       }).join('\n');
       const mensagemWhatsApp=[
-        '🍕 *NOVO PEDIDO - DELIVERY LV*',
+        '🍕 *NOVO PEDIDO - IMPÉRIO LV*',
         orderId?`*Pedido #${orderId}*`:'',
         orderCode?`🧾 *Código do pedido: ${orderCode}*`:'',
         '',
