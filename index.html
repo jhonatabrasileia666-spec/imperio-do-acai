@@ -226,8 +226,8 @@
   ];
   const edges=[['Mista',15],['Queijo',20],['Chocolate',15],['Catupiry',10],['Cheddar',10]], sizes=[['Pequena',37],['Média',47],['Grande',65]];
   const savory=['Calabresa Catupiry','Calabresa Cheddar','Calabresa','Carne Moída','Requeijão','Frango Catupiry','Frango Cheddar','Frango','Mussarela','Carne Seca'], sweet=['Banana Chocolate','Banana Frita Queijo','Chocolate Granulado','Prestígio','Romeu e Julieta'], drinks=[['Kina Abacaxi',10],['Baré Guaraná',10]];
-  const SUPABASE_URL='https://nhvarlrbqbryrurpdwvp.supabase.co';
-  const SUPABASE_PUBLISHABLE_KEY='sb_publishable_0nKLavga7G2XF-Ckz34tbw_VNbqfdo1';
+  const SUPABASE_URL='https://xzhxqjgekqbyucdgtvra.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY='sb_publishable_EDE6y5QWzz80ZPxjkP8CqA_l0nenLVj';
   const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
   let productLookup=null;
   async function loadProductLookup(){
@@ -245,7 +245,7 @@
   }
   let cart=[], selected=null, catalogProducts=[], catalogCategories=[], catalogProductSizes=[], catalogPizzaSizes=[], catalogEdges=[], selectedPizzaCatalogSize='Pequena', checkoutType='pickup', checkoutPayment='pix', checkoutCardType='', cashNeedsChange='no', cashChangeFor='', checkoutStep='cart', customerName='', customerPhone='', customerAddress='', storeIsOpen=false, storeStatusReady=false;
   let storeSettings={auto_schedule_enabled:true,open_time:'18:00',close_time:'23:00',card_credit_fee:5,esfiha_min_free_delivery:5,esfiha_small_order_fee:5};
-  const LAST_ORDER_KEY='deliverylv_last_order_v2';
+  const LAST_ORDER_KEY='imperio_acai_last_order_v1';
   let addingToOrder=null;
   function readLastOrder(){
     try{
@@ -651,7 +651,7 @@
         return `• ${item.qty}x ${item.name}${detalhes.length?` (${detalhes.join(' · ')})`:''} — ${money(item.price*item.qty)}`;
       }).join('\n');
       const mensagemWhatsApp=[
-        '🍕 *NOVO PEDIDO - IMPÉRIO LV*',
+        '🍕 *NOVO PEDIDO - IMPÉRIO DO AÇAÍ*',
         orderId?`*Pedido #${orderId}*`:'',
         orderCode?`🧾 *Código do pedido: ${orderCode}*`:'',
         '',
@@ -669,7 +669,7 @@
         '',
         `💰 *Total: ${money(totalPedido)}*`
       ].filter(Boolean).join('\n');
-      const whatsappUrl=`https://wa.me/5568992591250?text=${encodeURIComponent(mensagemWhatsApp)}`;
+      const whatsappUrl=`https://wa.me/5568992099937?text=${encodeURIComponent(mensagemWhatsApp)}`;
       if(orderId&&orderCode){
         saveLastOrder({
           orderId:Number(orderId),
