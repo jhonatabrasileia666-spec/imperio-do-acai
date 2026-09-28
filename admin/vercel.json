@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "ignoreCommand": "[ \"$VERCEL_PROJECT_ID\" = \"prj_eu39fmgmOgTApN7lLVJhzcJCXaD7\" ]",
   "git": {
     "deploymentEnabled": {
       "work-*": false
